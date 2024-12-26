@@ -34,6 +34,10 @@ class StickerPanelConfig {
   /// Default value: true
   final bool useTencentCloudChatStickerPackage;
 
+  /// Determines whether to compatible with the Tencent Cloud Chat Sticker Package 3.x version.
+  /// Default value : false
+  final bool useTencentCloudChatStickerPackageOldKeys;
+
   /// A list of unicode emoji, represented as integers.
   /// Default value: a list of common Unicode Emojis.
   /// To exclude Unicode Emoji from the display, pass an empty list.
@@ -46,6 +50,7 @@ class StickerPanelConfig {
   StickerPanelConfig({
     this.useQQStickerPackage = true,
     this.useTencentCloudChatStickerPackage = true,
+    this.useTencentCloudChatStickerPackageOldKeys = false,
     this.unicodeEmojiList = TUIKitStickerConstData.defaultUnicodeEmojiList,
     this.customStickerPackages = const [],
   });
@@ -66,10 +71,12 @@ class TIMUIKitChatConfig {
 
   /// Control if allowed to show reading status for group.
   /// [Default]: true.
+  /// [Deprecated: ] Please use [isShowReadingStatus] instead.
   final bool isShowGroupReadingStatus;
 
   /// Control if allowed to report reading status for group.
   /// [Default]: true.
+  /// [Deprecated: ] Please use [isShowReadingStatus] instead.
   final bool isReportGroupReadingStatus;
 
   /// Control if allowed to show the message operation menu after long pressing message.
@@ -101,12 +108,14 @@ class TIMUIKitChatConfig {
   final bool Function(V2TimMessage message)? isAtWhenReplyDynamic;
 
   /// The main switch of the group read receipt.
+  /// [Deprecated: ] Please use [isShowReadingStatus] instead.
   final bool isShowGroupMessageReadReceipt;
 
-  /// [Deprecated: ] Please use [groupReadReceiptPermissionList] instead.
+  /// [Deprecated: ] not support.
   final List<GroupReceptAllowType>? groupReadReceiptPermisionList;
 
   /// Control which group can send message read receipt.
+  /// [Deprecated: ] not support.
   final List<GroupReceiptAllowType>? groupReadReceiptPermissionList;
 
   /// Control if show self name in group chat.
@@ -180,9 +189,6 @@ class TIMUIKitChatConfig {
   /// The callback after user clicking the URL link in text messages.
   /// The default action is opening the link with the default browser of system.
   final void Function(String url)? onTapLink;
-
-  /// Whether to use the default emoji
-  final bool isUseDefaultEmoji;
 
   /// Whether shows avatar on history message list.
   /// [Default]: true.
@@ -269,9 +275,9 @@ class TIMUIKitChatConfig {
       this.isUseMessageReaction = true,
       this.isShowAvatar = true,
       this.isShowSelfNameInGroup = false,
-        this.isAtWhenReplyDynamic,
+      this.isAtWhenReplyDynamic,
       this.offlinePushInfo,
-      @Deprecated("Please use [isShowGroupReadingStatus] instead")
+      @Deprecated("Please use [isShowReadingStatus] instead")
       this.isShowGroupMessageReadReceipt = true,
       this.upperRecallTime = 120,
       this.isShowOthersNameInGroup = true,
@@ -281,9 +287,8 @@ class TIMUIKitChatConfig {
       this.notificationTitle = "",
       this.notificationIOSSound = "",
       this.isAllowSoundMessage = true,
-      @Deprecated("Please use [groupReadReceiptPermissionList] instead")
-      this.groupReadReceiptPermisionList,
-      this.groupReadReceiptPermissionList,
+      @Deprecated("not support") this.groupReadReceiptPermisionList,
+      @Deprecated("not support") this.groupReadReceiptPermissionList,
       this.isAllowEmojiPanel = true,
       this.isAllowShowMorePanel = true,
       this.isShowReadingStatus = true,
@@ -294,10 +299,10 @@ class TIMUIKitChatConfig {
       this.isEnableTextSelection,
       this.additionalDesktopMessageHoverBarItem,
       this.isShowGroupReadingStatus = true,
+      @Deprecated("Please use [isShowReadingStatus] instead")
       this.isReportGroupReadingStatus = true,
       this.showC2cMessageEditStatus = true,
       this.additionalDesktopControlBarItems,
       this.isAllowLongPressAvatarToAt = true,
-      this.isUseDefaultEmoji = false,
       this.isMemberCanAtAll = false});
 }
